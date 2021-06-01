@@ -5,8 +5,8 @@ import './TaskInfo.css';
 
 const TaskInfo = ({ tasks }) => {
     const params = useParams();
-    const task = tasks.filter(task => task.id == params.taskID)[0];
-console.log(tasks);
+    const task = tasks.filter(task => task.id === params.taskID)[0];
+
     const history = useHistory();
 
     const handleBackClick = () => {

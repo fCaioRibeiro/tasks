@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import {v4 as uuidv4} from 'uuid';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
@@ -8,18 +7,14 @@ import AddTask from './components/AddTask';
 import TaskInfo from './components/TaskInfo';
 import './App.css';
 
-const App = () =>  {
-  const [tasks, setTasks] = useState([]);
+const App = () =>  { 
 
-  // useEffect(() => {
-  //   const fetchTasks = async () => {
-  //     const { data } = await axios.get('https://jsonplaceholder.cypress.io/todos?_limit=11');
+  const tasksData = JSON.parse(localStorage.getItem("tasks"));
+  const [tasks, setTasks] = useState(tasksData || []);
 
-  //     setTasks(data);
-  //   }
-
-  //   fetchTasks();
-  // }, [])
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  })
 
   const handleTaskClick = (taskID) => {
     const newTasks = tasks.map(task => {
@@ -41,6 +36,7 @@ const App = () =>  {
     const newTask = [...tasks, {
       title: task.title
       ,observation: task.observation
+      ,priorite: task.priorite 
       ,id: uuidv4(10)
       ,completed: false
     }];

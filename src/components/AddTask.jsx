@@ -5,6 +5,7 @@ import Button from './Button';
 const AddTask = ({handleTaskAddition}) => {
     const [inputTitle, setTitleDate] = useState('');
     const [inputObservation, setObservationDate] = useState('');
+    const [inputPriorite, setPrioriteDate] = useState('');
 
     const handleInputTitleChange = (e) => {
         setTitleDate(e.target.value);    
@@ -14,14 +15,25 @@ const AddTask = ({handleTaskAddition}) => {
         setObservationDate(e.target.value);    
     }
 
+    const handleInputPrioriteChange = (e) => {
+        if (e.target.value < 0) 
+            return setPrioriteDate(0);
+
+        setPrioriteDate(e.target.value);    
+    }
+
     const handleTaskClick = () => {
+        if (!inputTitle || !inputObservation || !inputPriorite) return
+
         handleTaskAddition({
             title: inputTitle
             ,observation: inputObservation     
+            ,priorite: inputPriorite     
         });
 
         setTitleDate('');    
         setObservationDate('');    
+        setPrioriteDate(0);    
     }
 
     return (
@@ -47,6 +59,13 @@ const AddTask = ({handleTaskAddition}) => {
                     value={inputObservation} 
                     className='add-task-input' 
                     type="text" 
+                />
+                <input 
+                    placeholder='Prio'
+                    onChange={handleInputPrioriteChange} 
+                    value={inputPriorite} 
+                    className='add-task-input-priorite' 
+                    type="number" 
                 />
             </div> 
         </div>

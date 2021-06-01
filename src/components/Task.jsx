@@ -19,7 +19,7 @@ const Task = ({task, index, handleTaskClick, handleTaskDeletion}) => {
                 className='task-tittle' 
                 onClick={() => handleTaskClick(task.id)}>
                 {task.title}
-                <h6 className='priorite-task'>Prioridade {index}</h6>
+                <h6 className='priorite-task'>Ordem {index+1} | Prioridade {task.priorite}</h6>
             </div>
 
             <div className="buttons-container">

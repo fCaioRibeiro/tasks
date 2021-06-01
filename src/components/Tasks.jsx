@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Task from './Task';
 
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
