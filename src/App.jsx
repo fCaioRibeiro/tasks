@@ -9,17 +9,17 @@ import TaskInfo from './components/TaskInfo';
 import './App.css';
 
 const App = () =>  {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const { data } = await axios.get('https://jsonplaceholder.cypress.io/todos?_limit=11')
+  // useEffect(() => {
+  //   const fetchTasks = async () => {
+  //     const { data } = await axios.get('https://jsonplaceholder.cypress.io/todos?_limit=11');
 
-      setTasks(data)
-    }
+  //     setTasks(data);
+  //   }
 
-    fetchTasks();
-  }, [])
+  //   fetchTasks();
+  // }, [])
 
   const handleTaskClick = (taskID) => {
     const newTasks = tasks.map(task => {
@@ -37,14 +37,25 @@ const App = () =>  {
     setTasks(newTasks);
   }
 
-  const handleTaskAddition = (taskTittle) => {
+  const handleTaskAddition = (task) => {
     const newTask = [...tasks, {
-      tittle: taskTittle
+      title: task.title
+      ,observation: task.observation
       ,id: uuidv4(10)
       ,completed: false
     }];
 
     setTasks(newTask);
+  }
+
+  const handleTaskOrder = (result) => {
+    if (!result.destination) return;
+
+    const newTasks = [...tasks];
+    const [reorderedItem] = newTasks.splice(result.source.index, 1);
+    newTasks.splice(result.destination.index, 0, reorderedItem);
+
+    setTasks(newTasks);
   }
 
   return (
@@ -58,11 +69,12 @@ const App = () =>  {
             <Tasks tasks={tasks} 
               handleTaskClick={handleTaskClick} 
               handleTaskDeletion={handleTaskDeletion}
+              handleTaskOrder={handleTaskOrder}
             />
 
           </>
         )} />
-        <Route path='/:taskID' exact render={ (props) => <TaskInfo tasks={tasks} /> } />
+        <Route path='/:taskID' exact render={ (props) => <TaskInfo {...props} tasks={tasks} /> } />
       </div>
     </Router>
   )

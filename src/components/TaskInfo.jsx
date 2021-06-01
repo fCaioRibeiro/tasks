@@ -5,8 +5,8 @@ import './TaskInfo.css';
 
 const TaskInfo = ({ tasks }) => {
     const params = useParams();
-    const task = tasks.filter(task => task.id === parseInt(params.taskID))[0];
-
+    const task = tasks.filter(task => task.id == params.taskID)[0];
+console.log(tasks);
     const history = useHistory();
 
     const handleBackClick = () => {
@@ -19,8 +19,7 @@ const TaskInfo = ({ tasks }) => {
                 <button className='task-back-info-button' onClick={handleBackClick}>x</button>
                 <h2>{ task.title }</h2>
                 <p>
-                    caio teve que fazer esse teste da atividade
-                    voce sabia que é meio corno?
+                    { task.observation }
                 </p>
                 <small className='task-info-footer'>
                     Atividade { task.completed ? 'realizada' : 'não realizada'  }

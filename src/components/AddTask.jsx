@@ -3,31 +3,53 @@ import './AddTask.css';
 import Button from './Button';
 
 const AddTask = ({handleTaskAddition}) => {
-    const [inputData, setInputDate] = useState('');
+    const [inputTitle, setTitleDate] = useState('');
+    const [inputObservation, setObservationDate] = useState('');
 
-    const handleInputChange = (e) => {
-        setInputDate(e.target.value);    
+    const handleInputTitleChange = (e) => {
+        setTitleDate(e.target.value);    
+    }
+
+    const handleInputObservationChange = (e) => {
+        setObservationDate(e.target.value);    
     }
 
     const handleTaskClick = () => {
-        handleTaskAddition(inputData);
-        setInputDate('');    
+        handleTaskAddition({
+            title: inputTitle
+            ,observation: inputObservation     
+        });
+
+        setTitleDate('');    
+        setObservationDate('');    
     }
 
     return (
-        <div className='add-task-container'>
-            <input 
-                onChange={handleInputChange} 
-                value={inputData} 
-                className='add-task-input' 
-                type="text" 
-            />
-            <div className="add-task-button-container">
-                <Button onClick={handleTaskClick}>
-                    Adicionar
-                </Button>
+        <div>
+            <div className='add-task-container'>
+                <input 
+                    placeholder='Titulo'
+                    onChange={handleInputTitleChange} 
+                    value={inputTitle} 
+                    className='add-task-input' 
+                    type="text" 
+                />
+                <div className="add-task-button-container">
+                    <Button onClick={handleTaskClick}>
+                        Adicionar
+                    </Button>
+                </div>
             </div>
-        </div> 
+            <div className='add-task-container'>
+                <input 
+                    placeholder='Observação'
+                    onChange={handleInputObservationChange} 
+                    value={inputObservation} 
+                    className='add-task-input' 
+                    type="text" 
+                />
+            </div> 
+        </div>
     );
 }
  

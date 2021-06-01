@@ -3,22 +3,23 @@ import { useHistory } from 'react-router-dom';
 
 import './Task.css';
 
-const Task = ({task, handleTaskClick, handleTaskDeletion}) => {
+const Task = ({task, index, handleTaskClick, handleTaskDeletion}) => {
     const history = useHistory();
 
     const handleTaskInfoClick = () => {
         history.push(`/${task.id}`)
     }
 
-    return ( 
-        <div 
-            className="task-container" 
+    return (
+        <li
+            className={task.completed ? 'task-container-completed' : 'task-container'} 
             style={task.completed ? {borderLeft: '6px solid #ffae00'} : {}}
         >
             <div
                 className='task-tittle' 
                 onClick={() => handleTaskClick(task.id)}>
                 {task.title}
+                <h6 className='priorite-task'>Prioridade {index}</h6>
             </div>
 
             <div className="buttons-container">
@@ -26,7 +27,7 @@ const Task = ({task, handleTaskClick, handleTaskDeletion}) => {
                 <button onClick={() => handleTaskDeletion(task.id)} className='remove-task-button'>x</button>
             </div>
 
-        </div>
+        </li>
      );
 }
  

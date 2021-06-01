@@ -1,4 +1,5 @@
 .task-container {
+    transition: all 0.2s ease;
     background-color: #313a49;
     margin: 5px 0;
     display: flex;
@@ -8,8 +9,23 @@
     padding: 8px;
 }
 
+.task-container-completed {
+    transition: all 0.2s ease;
+    background-color: #313a49;
+    margin: 3px 0;
+    display: flex;
+    border-radius: 5px;
+    color: white;
+    font-size: 10px;
+    justify-content: space-between;
+    padding: 5px 8px 0 3px;
+}
+
+.task-container-completed h6 {
+    display: none;
+}
+
 .task-tittle {
-    cursor: pointer;
     width: 100%;
 }
 
@@ -19,23 +35,24 @@
     font-size: 16px;
     color: #ffae00;
     cursor: pointer;
-    margin: 0 10px;
+    padding: 0 8px;
 }
 
 .info-task-button {
     background-color: #313a49;
-    border: 1px solid #ffae00;
-    border-radius: 50%;
-    padding: 1px 7px 1px 7px;
+    border: none;
     font-size: 16px;
     color: #ffae00;
     cursor: pointer; 
-    margin: 0 3px;
+    padding: 0 8px;
 }
 
 .buttons-container {
     width: 30%;
-    padding: 10px;
     display: flex;
     justify-content: flex-end;
+}
+
+.priorite-task {
+    color: #ffae00;   
 }
