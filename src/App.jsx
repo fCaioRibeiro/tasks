@@ -26,7 +26,7 @@ const App = () =>  {
     setTasks(newTasks);
   }
 
-  const handleTaskDeletion = taskID => {
+  const handleTaskDeletion = (taskID) => {
     const newTasks = tasks.filter(task => task.id !== taskID);
 
     setTasks(newTasks);
@@ -39,6 +39,7 @@ const App = () =>  {
       ,priorite: task.priorite 
       ,id: uuidv4(10)
       ,completed: false
+      ,actions : []
     }];
 
     setTasks(newTask);

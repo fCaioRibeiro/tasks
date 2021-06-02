@@ -1,6 +1,8 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
+import Action from './TaskAction';
+import AddAction from './AddAction';
 import './TaskInfo.css';
 
 const TaskInfo = ({ tasks }) => {
@@ -21,9 +23,15 @@ const TaskInfo = ({ tasks }) => {
                 <p>
                     { task.observation }
                 </p>
-                <small className='task-info-footer'>
-                    Atividade { task.completed ? 'realizada' : 'não realizada'  }
-                </small>
+                <AddAction />
+            </div>
+
+            <div className="task-info-container">
+                <h2>Historico</h2>
+                
+                <ul>
+                    { (task.actions || []).map(action => <Action action={action} />) }
+                </ul>
             </div>
         </>
      );
