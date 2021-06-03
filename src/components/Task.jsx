@@ -1,9 +1,8 @@
 import React from 'react';
+import { Button, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
-import './Task.css';
-
-const Task = ({task, index, handleTaskClick, handleTaskDeletion}) => {
+const Task = ({task, index, handleTaskDeletion}) => {
     const history = useHistory();
 
     const handleTaskInfoClick = () => {
@@ -11,23 +10,15 @@ const Task = ({task, index, handleTaskClick, handleTaskDeletion}) => {
     }
 
     return (
-        <li
-            className={task.completed ? 'task-container-completed' : 'task-container'} 
-            style={task.completed ? {borderLeft: '6px solid #ffae00'} : {}}
-        >
-            <div
-                className='task-tittle' 
-                onClick={() => handleTaskClick(task.id)}>
+        <Card.Body className='py-2' onClick={handleTaskInfoClick}>
+            <Card.Title className='mb-0'>
                 {task.title}
-                <h6 className='priorite-task'>Ordem {index+1} | Prioridade {task.priorite}</h6>
-            </div>
-
-            <div className="buttons-container">
-                <button onClick={handleTaskInfoClick} className='info-task-button'>𝒊</button>
-                <button onClick={() => handleTaskDeletion(task.id)} className='remove-task-button'>x</button>
-            </div>
-
-        </li>
+            </Card.Title>
+            <Card.Text>
+                Ordem {index+1} | Prioridade {task.priorite} 
+                <Button onClick={() => handleTaskDeletion(task.id)}>x</Button>   
+            </Card.Text>
+        </Card.Body>
      );
 }
  

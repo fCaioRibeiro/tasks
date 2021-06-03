@@ -71,7 +71,7 @@ const App = () =>  {
 
           </>
         )} />
-        <Route path='/:taskID' exact render={ (props) => <TaskInfo {...props} tasks={tasks} /> } />
+        <Route path='/:taskID' exact render={ (props) => <TaskInfo {...props} tasks={tasks} handleTaskClick={handleTaskClick} /> } />
       </div>
     </Router>
   )

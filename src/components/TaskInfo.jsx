@@ -5,7 +5,7 @@ import Action from './TaskAction';
 import AddAction from './AddAction';
 import './TaskInfo.css';
 
-const TaskInfo = ({ tasks }) => {
+const TaskInfo = ({ tasks, handleTaskClick }) => {
     const params = useParams();
     const task = tasks.filter(task => task.id === params.taskID)[0];
 
@@ -24,6 +24,7 @@ const TaskInfo = ({ tasks }) => {
                     { task.observation }
                 </p>
                 <AddAction />
+                <button className='task-back-info-button' onClick={() => handleTaskClick(task.id)}>aqui</button>
             </div>
 
             <div className="task-info-container">

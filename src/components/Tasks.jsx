@@ -2,6 +2,7 @@ import React from 'react';
 import Task from './Task';
 
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { Card, Col, Row } from 'react-bootstrap';
 
 const Tasks = ({ tasks, handleTaskClick, handleTaskDeletion, handleTaskOrder }) => {
 
@@ -9,22 +10,25 @@ const Tasks = ({ tasks, handleTaskClick, handleTaskDeletion, handleTaskOrder }) 
         <DragDropContext onDragEnd={handleTaskOrder}>
             <Droppable droppableId='characters'>
                 {(provided) => (
-                    <ul {...provided.droppableProps} ref={provided.innerRef}>
-                        {tasks.map( (task, index) => (
-                            <Draggable key={task.id} index={index} draggableId={task.id+'task'}>
-                                {(provided) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                    >
-                                        <Task key={task.id} index={index} ref={provided.innerRef} task={task} handleTaskClick={handleTaskClick} handleTaskDeletion={handleTaskDeletion}/>    
-                                    </div>
-                                )}    
-                            </Draggable>
-                        ))}
-                        {provided.placeholder}
-                    </ul>
+                    <Row {...provided.droppableProps} ref={provided.innerRef} xs={1} md={1} className="g-4">
+                        <Col>
+                            {tasks.map( (task, index) => (
+                                <Draggable key={task.id} index={index} draggableId={task.id+'task'}>
+                                    {(provided) => (
+                                            <Card 
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                className="mb-2"
+                                            >
+                                                <Task key={task.id} index={index} ref={provided.innerRef} task={task} handleTaskClick={handleTaskClick} handleTaskDeletion={handleTaskDeletion}/>    
+                                            </Card>
+                                    )}
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </Col>
+                    </Row>
                 )}
             </Droppable>
         </DragDropContext>
