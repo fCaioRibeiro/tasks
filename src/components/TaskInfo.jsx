@@ -3,7 +3,6 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import Action from './TaskAction';
 import AddAction from './AddAction';
-import './TaskInfo.css';
 
 const TaskInfo = ({ tasks, handleTaskClick }) => {
     const params = useParams();

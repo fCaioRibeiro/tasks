@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
 import TaskInfo from './components/TaskInfo';
-import './App.css';
+import { Container } from 'react-bootstrap';
 
 const App = () =>  { 
 
@@ -57,7 +57,7 @@ const App = () =>  {
 
   return (
     <Router>
-      <div className='container'>
+      <Container>
         <h1 style={{color:'white'}}>Tarefas</h1>
         <Route path='/' exact render={() => (
           <>
@@ -72,7 +72,7 @@ const App = () =>  {
           </>
         )} />
         <Route path='/:taskID' exact render={ (props) => <TaskInfo {...props} tasks={tasks} handleTaskClick={handleTaskClick} /> } />
-      </div>
+      </Container>
     </Router>
   )
 }

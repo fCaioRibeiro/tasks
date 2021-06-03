@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Card, FloatingLabel } from 'react-bootstrap';
 
 const AddTask = ({handleTaskAddition}) => {
     const [inputTitle, setTitleDate] = useState('');
@@ -36,38 +36,53 @@ const AddTask = ({handleTaskAddition}) => {
     }
 
     return (
-        <div>
-            <div className='add-task-container'>
-                <input 
-                    placeholder='Titulo'
-                    onChange={handleInputTitleChange} 
-                    value={inputTitle} 
-                    className='add-task-input' 
-                    type="text" 
-                />
-                <div className="add-task-button-container">
-                    <Button onClick={handleTaskClick}>
-                        Adicionar
-                    </Button>
-                </div>
-            </div>
-            <div className='add-task-container'>
-                <input 
-                    placeholder='Observação'
-                    onChange={handleInputObservationChange} 
-                    value={inputObservation} 
-                    className='add-task-input' 
-                    type="text" 
-                />
-                <input 
-                    placeholder='Prio'
-                    onChange={handleInputPrioriteChange} 
-                    value={inputPriorite} 
-                    className='add-task-input-priorite' 
-                    type="number" 
-                />
-            </div> 
-        </div>
+
+        <Card>
+            <Card.Body>
+                <Card.Title>Nova tarefa</Card.Title>
+                    <FloatingLabel
+                        controlId="floatingInput"
+                        label="Email address"
+                        className="mb-3"
+                    >
+                        <Form.Control type="email" placeholder="name@example.com" />
+                    </FloatingLabel>
+                <Button variant="primary">Go somewhere</Button>
+            </Card.Body>
+        </Card>
+
+        // <div>
+        //     <div className='add-task-container'>
+        //         <input 
+        //             placeholder='Titulo'
+        //             onChange={handleInputTitleChange} 
+        //             value={inputTitle} 
+        //             className='add-task-input' 
+        //             type="text" 
+        //         />
+        //         <div className="add-task-button-container">
+        //             <Button onClick={handleTaskClick}>
+        //                 Adicionar
+        //             </Button>
+        //         </div>
+        //     </div>
+        //     <div className='add-task-container'>
+        //         <input 
+        //             placeholder='Observação'
+        //             onChange={handleInputObservationChange} 
+        //             value={inputObservation} 
+        //             className='add-task-input' 
+        //             type="text" 
+        //         />
+        //         <input 
+        //             placeholder='Prio'
+        //             onChange={handleInputPrioriteChange} 
+        //             value={inputPriorite} 
+        //             className='add-task-input-priorite' 
+        //             type="number" 
+        //         />
+        //     </div> 
+        // </div>
     );
 }
  

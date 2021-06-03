@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import './AddTask.css';
-import Button from './Button';
+import { Button } from 'react-bootstrap';
 
 const AddAction = ({handleActionAddition}) => {
     const [inputTitle, setTitleDate] = useState('');
