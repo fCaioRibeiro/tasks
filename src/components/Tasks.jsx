@@ -15,7 +15,8 @@ const Tasks = ({ tasks, handleTaskClick, handleTaskDeletion, handleTaskOrder }) 
                             {tasks.map( (task, index) => (
                                 <Draggable key={task.id} index={index} draggableId={task.id+'task'}>
                                     {(provided) => (
-                                            <Card 
+                                            <Card
+                                                style={{backgroundColor: '#39a6a3'}}
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}

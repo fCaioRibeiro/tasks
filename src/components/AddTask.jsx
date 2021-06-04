@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, FloatingLabel } from 'react-bootstrap';
+import { Button, Card, FormControl, InputGroup } from 'react-bootstrap';
 
 const AddTask = ({handleTaskAddition}) => {
     const [inputTitle, setTitleDate] = useState('');
@@ -37,52 +37,39 @@ const AddTask = ({handleTaskAddition}) => {
 
     return (
 
-        <Card>
+        <Card className='mb-1' bg='dark' text='white'>
             <Card.Body>
                 <Card.Title>Nova tarefa</Card.Title>
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label="Email address"
-                        className="mb-3"
-                    >
-                        <Form.Control type="email" placeholder="name@example.com" />
-                    </FloatingLabel>
-                <Button variant="primary">Go somewhere</Button>
+                    <InputGroup className="mb-3">
+                        <FormControl
+                            className="w-25 bg-transparent text-white"
+                            placeholder="Titulo"
+                            aria-label="Titulo"
+                            aria-describedby="basic-addon2"
+                            onChange={handleInputTitleChange} 
+                            value={inputTitle}
+                        />
+                        <FormControl
+                            className="w-50 bg-transparent text-white"
+                            placeholder="Observação"
+                            aria-label="Observação"
+                            aria-describedby="basic-addon2"
+                            onChange={handleInputObservationChange} 
+                            value={inputObservation} 
+                        />
+                        <FormControl
+                            className='bg-transparent text-white'
+                            type='number'
+                            placeholder="Prioridade"
+                            aria-label="Prioridade"
+                            aria-describedby="basic-addon2"
+                            onChange={handleInputPrioriteChange} 
+                            value={inputPriorite || 0} 
+                        />
+                        <Button variant="outline-secondary border-light" onClick={handleTaskClick}>Add</Button>
+                    </InputGroup>
             </Card.Body>
         </Card>
-
-        // <div>
-        //     <div className='add-task-container'>
-        //         <input 
-        //             placeholder='Titulo'
-        //             onChange={handleInputTitleChange} 
-        //             value={inputTitle} 
-        //             className='add-task-input' 
-        //             type="text" 
-        //         />
-        //         <div className="add-task-button-container">
-        //             <Button onClick={handleTaskClick}>
-        //                 Adicionar
-        //             </Button>
-        //         </div>
-        //     </div>
-        //     <div className='add-task-container'>
-        //         <input 
-        //             placeholder='Observação'
-        //             onChange={handleInputObservationChange} 
-        //             value={inputObservation} 
-        //             className='add-task-input' 
-        //             type="text" 
-        //         />
-        //         <input 
-        //             placeholder='Prio'
-        //             onChange={handleInputPrioriteChange} 
-        //             value={inputPriorite} 
-        //             className='add-task-input-priorite' 
-        //             type="number" 
-        //         />
-        //     </div> 
-        // </div>
     );
 }
  

@@ -6,6 +6,7 @@ import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
 import TaskInfo from './components/TaskInfo';
 import { Container } from 'react-bootstrap';
+import Header from './components/Header';
 
 const App = () =>  { 
 
@@ -57,8 +58,8 @@ const App = () =>  {
 
   return (
     <Router>
+      <Header title='Tarefas' />
       <Container>
-        <h1 style={{color:'white'}}>Tarefas</h1>
         <Route path='/' exact render={() => (
           <>
 

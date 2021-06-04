@@ -10,13 +10,14 @@ const Task = ({task, index, handleTaskDeletion}) => {
     }
 
     return (
-        <Card.Body className='py-2' onClick={handleTaskInfoClick}>
-            <Card.Title className='mb-0'>
+
+        <Card.Body style={{backgroundColor: '#deeeea'}}  className='py-2 px-0' onClick={handleTaskInfoClick}>
+            <Card.Title className='mb-0 px-3' as='h6'>
+                <small className='float-end fw-normal text-muted' style={{ fontSize: '12px' }}>11/11/2020</small>
                 {task.title}
             </Card.Title>
-            <Card.Text>
+            <Card.Text className='text-muted small px-3 m-0'>
                 Ordem {index+1} | Prioridade {task.priorite} 
-                <Button onClick={() => handleTaskDeletion(task.id)}>x</Button>   
             </Card.Text>
         </Card.Body>
      );
