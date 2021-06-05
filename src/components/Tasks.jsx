@@ -4,7 +4,7 @@ import Task from './Task';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { Card, Col, Row } from 'react-bootstrap';
 
-const Tasks = ({ tasks, handleTaskClick, handleTaskDeletion, handleTaskOrder }) => {
+const Tasks = ({ tasks, handleTaskDeletion, handleTaskOrder }) => {
 
     return (
         <DragDropContext onDragEnd={handleTaskOrder}>
@@ -16,13 +16,12 @@ const Tasks = ({ tasks, handleTaskClick, handleTaskDeletion, handleTaskOrder }) 
                                 <Draggable key={task.id} index={index} draggableId={task.id+'task'}>
                                     {(provided) => (
                                             <Card
-                                                style={{backgroundColor: '#39a6a3'}}
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
                                                 className="mb-2"
                                             >
-                                                <Task key={task.id} index={index} ref={provided.innerRef} task={task} handleTaskClick={handleTaskClick} handleTaskDeletion={handleTaskDeletion}/>    
+                                                <Task key={task.id} index={index} ref={provided.innerRef} task={task} handleTaskDeletion={handleTaskDeletion} />    
                                             </Card>
                                     )}
                                 </Draggable>

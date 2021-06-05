@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import 'moment/locale/pt-br';
+import { Container } from 'react-bootstrap';
 
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
 import TaskInfo from './components/TaskInfo';
-import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 
 const App = () =>  { 
@@ -17,16 +18,6 @@ const App = () =>  {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   })
 
-  const handleTaskClick = (taskID) => {
-    const newTasks = tasks.map(task => {
-      if (task.id === taskID) return {...task, completed: !task.completed}
-
-      return task;
-    });
-    
-    setTasks(newTasks);
-  }
-
   const handleTaskDeletion = (taskID) => {
     const newTasks = tasks.filter(task => task.id !== taskID);
 
@@ -37,13 +28,27 @@ const App = () =>  {
     const newTask = [...tasks, {
       title: task.title
       ,observation: task.observation
-      ,priorite: task.priorite 
+      ,priorite: task.priorite
+      ,time: Date.now() 
       ,id: uuidv4(10)
       ,completed: false
-      ,actions : []
+      ,actions : [{
+        title: 'Task Aberta'
+        ,time: Date.now()
+      }]
     }];
 
     setTasks(newTask);
+  }
+
+  const handleActionAddition = (taskID, action, completed) => {
+    const newTasks = tasks.map(task => {
+      if (task.id === taskID) return {...task, actions: [...task.actions, action], completed: completed}
+
+      return task;
+    });
+    
+    setTasks(newTasks);  
   }
 
   const handleTaskOrder = (result) => {
@@ -65,14 +70,13 @@ const App = () =>  {
 
             <AddTask handleTaskAddition={handleTaskAddition}/>
             <Tasks tasks={tasks} 
-              handleTaskClick={handleTaskClick} 
               handleTaskDeletion={handleTaskDeletion}
               handleTaskOrder={handleTaskOrder}
             />
 
           </>
         )} />
-        <Route path='/:taskID' exact render={ (props) => <TaskInfo {...props} tasks={tasks} handleTaskClick={handleTaskClick} /> } />
+        <Route path='/:taskID' exact render={ (props) => <TaskInfo {...props} tasks={tasks} handleActionAddition={handleActionAddition}/> } />
       </Container>
     </Router>
   )

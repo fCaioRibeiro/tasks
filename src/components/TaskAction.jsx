@@ -1,12 +1,19 @@
 import React from "react";
+import { ListGroupItem } from "react-bootstrap";
+import moment from 'moment';
 
-const Action = ({action}) => {
+const Actions = ({action}) => {
     return (
-        <li>
+        <ListGroupItem style={{backgroundColor: '#deeeea'}}>
             <span>{ action.title }</span>
-            <small>{ action.time }</small>
-        </li>
+            <small 
+                className='float-end fw-normal text-muted' 
+                style={{ fontSize: '12px' }}
+            >
+                {moment(action.time).calendar()}
+            </small>
+        </ListGroupItem> 
     ); 
 };
 
-export default Action;
+export default Actions;
