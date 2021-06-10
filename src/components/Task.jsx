@@ -7,7 +7,7 @@ const Task = ({task, index}) => {
     const history = useHistory();
 
     const handleTaskInfoClick = () => {
-        history.push(`/${task.id}`)
+        history.push(`/task/${task.id}`)
     }
 
     return (

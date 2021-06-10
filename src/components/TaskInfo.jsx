@@ -5,7 +5,7 @@ import Actions from './TaskAction';
 import AddAction from './AddAction';
 import { Card, ListGroup } from 'react-bootstrap';
 
-const TaskInfo = ({ tasks, handleActionAddition,   }) => {
+const TaskInfo = ({ tasks, handleActionAddition, handleTaskDeletion  }) => {
     const params = useParams();
     const task = tasks.filter(task => task.id === params.taskID)[0];
 
@@ -23,20 +23,20 @@ const TaskInfo = ({ tasks, handleActionAddition,   }) => {
                 text='white'
             >
                 <Card.Body>
-                    <Card.Title>{ task.title }</Card.Title>
+                    <Card.Title>{ task && task.title }</Card.Title>
                     <Card.Text>
-                        { task.observation }
+                        { task && task.observation }
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                    <AddAction task={task} handleActionAddition={handleActionAddition}/>    
+                    <AddAction task={task} handleActionAddition={handleActionAddition} handleTaskDeletion={handleTaskDeletion}/>    
                 </Card.Footer>
             </Card>
 
             <Card>
                 <ListGroup className="list-group-flush">
                     {
-                        task.actions.map((action, index) => (
+                        task && task.actions.map((action, index) => (
                             <Actions key={index} action={action}/>
                         ))
                     }

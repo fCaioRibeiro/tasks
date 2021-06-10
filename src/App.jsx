@@ -8,6 +8,7 @@ import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
 import TaskInfo from './components/TaskInfo';
 import Header from './components/Header';
+import Login from './components/login/login';
 
 const App = () =>  { 
 
@@ -20,7 +21,6 @@ const App = () =>  {
 
   const handleTaskDeletion = (taskID) => {
     const newTasks = tasks.filter(task => task.id !== taskID);
-
     setTasks(newTasks);
   }
 
@@ -63,23 +63,33 @@ const App = () =>  {
 
   return (
     <Router>
-      <Header title='Tarefas' />
+      <Route path='/login' exact component={Login} />
       <Container>
         <Route path='/' exact render={() => (
           <>
+            <Header title='Tarefas' />
 
             <AddTask handleTaskAddition={handleTaskAddition}/>
             <Tasks tasks={tasks} 
-              handleTaskDeletion={handleTaskDeletion}
               handleTaskOrder={handleTaskOrder}
             />
 
           </>
         )} />
-        <Route path='/:taskID' exact render={ (props) => <TaskInfo {...props} tasks={tasks} handleActionAddition={handleActionAddition}/> } />
+        <Route path='/task/:taskID' exact render={ (props) => (
+          <> 
+            <Header title='Tarefas' />
+            <TaskInfo 
+              {...props} 
+              tasks={tasks} 
+              handleActionAddition={handleActionAddition} 
+              handleTaskDeletion={handleTaskDeletion}
+            /> 
+          </> 
+        )} />
       </Container>
     </Router>
   )
 }
 
-export default App
+export default App;

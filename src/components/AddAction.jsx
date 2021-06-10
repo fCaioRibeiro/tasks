@@ -1,34 +1,43 @@
 import React, { useState } from 'react';
 import { Button, FormControl, InputGroup } from 'react-bootstrap';
+import { useHistory } from 'react-router';
 
-const AddAction = ({ task, handleActionAddition,  }) => {
+const AddAction = ({ task, handleActionAddition, handleTaskDeletion }) => {
     const [inputTitle, setTitleDate] = useState('');
+    const history = useHistory();
 
     const handleInputTitleChange = (e) => {
         setTitleDate(e.target.value);    
     }
 
-    const handleActionClick = (completed = task.completed) => {
+    const handleActionClick = (add) => {
         
-        if (inputTitle && !completed) {
+        if (add && !task.completed) {
             handleActionAddition(task.id, {
                 title: inputTitle
                 ,time: Date.now()    
-            }, completed);
+            }, task.completed);
             
-            setTitleDate('');    
-        } else if (!completed && !inputTitle) {
+            setTitleDate('');
+
+        } else if (!task.completed && !add) {
             handleActionAddition(task.id, {
                 title: 'Task Finalizada'
                 ,time: Date.now()    
-            }, !completed);
-        } else if (completed && !inputTitle) {
+            }, !task.completed);
+
+        } else if (task.completed && !add) {
             handleActionAddition(task.id, {
                 title: 'Task Reaberta'
                 ,time: Date.now()    
-            }, !completed);   
+            }, !task.completed);   
         }
+        
+    }
 
+    const handleDeletionClick = () => {
+        handleTaskDeletion(task.id);
+        history.goBack();
     }
 
     return (
@@ -42,11 +51,11 @@ const AddAction = ({ task, handleActionAddition,  }) => {
                 onChange={handleInputTitleChange}
                 value={inputTitle}
             />
-            <Button variant="outline-secondary border-light" onClick={() => handleActionClick()}>Adicionar</Button>
-            <Button variant="outline-success border-light" onClick={() => handleActionClick()}>
-                {task.completed ? 'Reabrir' : 'Finalizar'}
+            <Button variant="outline-secondary border-light" onClick={() => handleActionClick(true)}>Adicionar</Button>
+            <Button variant="outline-success border-light" onClick={() => handleActionClick(false)}>
+                {task && task.completed ? 'Reabrir' : 'Finalizar'}
             </Button>
-            <Button variant="outline-danger border-light">Remover</Button>
+            <Button variant="outline-danger border-light" onClick={() => handleDeletionClick()}>Remover</Button>
         </InputGroup>
 
         // <div>
